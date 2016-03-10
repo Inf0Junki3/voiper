@@ -97,7 +97,9 @@ class AbstractFuzzer:
         # the user to specify string length I have had to move that string generation
         # to another method, call it manually and then import the protocol mapping
         primitives.gen_strings(max_len)
-        from requests import sip
+        import imp
+        sip = imp.load_source("sip", "sulley/requests/sip.py")
+        #from requests import sip
 
         self.sess = sessions.session(session_filename=self.audit_folder + \
         '/sulley.session', skip=self.skip, proto=self.proto, audit_folder=self.audit_folder, \
